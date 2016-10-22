@@ -26,8 +26,9 @@ function init() {
     squares[i].style.background = colors[i];
       squares[i].addEventListener("click", function() {
       var clickedColor = this.style.background;
-      if (choiceCounter !== maxChoices && !gameOver) {
+      if (choiceCounter !== maxChoices && !gameOver && !this.classList.contains('picked')) {
         choiceCounter++
+        this.classList.add('picked');
         if (clickedColor === pickedColor) {
           gameOver = true;
           changeColors(pickedColor)
@@ -80,6 +81,7 @@ function reset(colnum) {
   resetButton.textContent = "New Colors"
   winnerText.style.display = "none";
   for (var i=0; i < squares.length; i++) {
+    squares[i].classList.remove('picked');
     if (colors[i]){
       squares[i].style.background = colors[i];
       squares[i].style.display = 'block';
