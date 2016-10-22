@@ -3,7 +3,6 @@ var colors = generateRandomColors(colorNum);
 var pickedColor = pickColor();
 var messageDisplay = document.querySelector("#message");
 var colordisplay = document.getElementById('colordisplay');
-colordisplay.textContent = pickedColor;
 var squares = document.querySelectorAll('.square');
 var header = document.querySelector('.header');
 var resetButton = document.querySelector('.controls .reset');
@@ -16,6 +15,7 @@ controls();
 
 
 function init() {
+  colordisplay.textContent = pickedColor;
   for (var i=0; i < squares.length; i++) {
     squares[i].style.background = colors[i];
     squares[i].addEventListener("click", function() {
