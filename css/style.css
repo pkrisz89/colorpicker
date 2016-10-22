@@ -4,7 +4,7 @@ body {
   padding: 0;
 }
 
-a {
+button {
   margin: 0 10px;
 }
 
@@ -43,4 +43,29 @@ h1 {
 
 .active {
   background: blue;
+}
+
+#howto-popup {
+  display: none;
+  background: #fff;
+  position: absolute;
+  padding: 15px;
+  max-width: 600px;
+  border-radius: 5px;
+}
+
+#howto-popup #close {
+ float: right;
+}
+
+.winnertext {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-family: Helvetica;
+  font-weight: bold;
+  font-size: 5em;
+  color: #efefef;
+  text-shadow: 2px 2px #FF0000;
+  display: none;
 }

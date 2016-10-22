@@ -8,13 +8,14 @@ var header = document.querySelector('.header');
 var resetButton = document.querySelector('.controls .reset');
 var easyButton = document.querySelector('#easy');
 var hardButton = document.querySelector('#hard');
+var winnerText = document.querySelector('.winnertext');
 
 
 init();
-controls();
-
 
 function init() {
+  popupControl();
+  controls();
   colordisplay.textContent = pickedColor;
   for (var i=0; i < squares.length; i++) {
     squares[i].style.background = colors[i];
@@ -25,6 +26,7 @@ function init() {
         changeColors(pickedColor)
         header.style.background = pickedColor;
         resetButton.textContent = "Play again?"
+        winnerText.style.display = "block";
       } else {
         this.style.background = "#232323";
         messageDisplay.textContent = "Try again!";
@@ -33,9 +35,23 @@ function init() {
   }
 }
 
+function popupControl() {
+  var howtoplay = document.querySelector('#howto');
+  var popup = document.querySelector('#howto-popup');
+  var closeButton = document.querySelector('#close');
+
+  howtoplay.addEventListener("click", function() {
+    popup.style.display = 'block';
+  });
+  closeButton.addEventListener("click", function() {
+    popup.style.display = 'none';
+  });
+}
+
 function reset(colnum) {
   colors = generateRandomColors(colnum);
   resetButton.textContent = "New Colors"
+  winnerText.style.display = "none";
   for (var i=0; i < squares.length; i++) {
     if (colors[i]){
       squares[i].style.background = colors[i];
