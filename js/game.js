@@ -21,8 +21,8 @@ function init() {
   colordisplay.textContent = pickedColor;
   for (var i=0; i < squares.length; i++) {
     squares[i].style.background = colors[i];
-    squares[i].addEventListener("click", function() {
-        var clickedColor = this.style.background;
+      squares[i].addEventListener("click", function() {
+      var clickedColor = this.style.background;
       if (choiceCounter !== maxChoices) {
         choiceCounter++
         if (clickedColor === pickedColor) {
@@ -39,17 +39,10 @@ function init() {
           winnerText.style.display = "block";
           this.style.background = "#232323";
         }
-        }
-
-     /* } else {
-          
-     }*/
+      }
     });
   }
 }
-
-
-
 
 function popupControl() {
   var howtoplay = document.querySelector('#howto');
@@ -84,8 +77,6 @@ function reset(colnum) {
   messageDisplay.textContent = "";
   header.style.background = "#232323";
 }
-
-
 
 function controls() {
   easyButton.addEventListener("click", function() {
