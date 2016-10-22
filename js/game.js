@@ -1,12 +1,8 @@
-var colorNum = 6;
-var colors = generateRandomColors(colorNum);
+var colors = generateRandomColors(6);
 var pickedColor = pickColor();
 var colordisplay = document.getElementById('colordisplay');
 var squares = document.querySelectorAll('.square');
 var header = document.querySelector('.header');
-var resetButton = document.querySelector('.controls .reset');
-var easyButton = document.querySelector('#easy');
-var hardButton = document.querySelector('#hard');
 var winnerText = document.querySelector('.winnertext');
 var choiceCounter = 0;
 var maxChoices = 3;
@@ -14,14 +10,16 @@ var winCounter = 0;
 var lossCounter = 0;
 var gameOver = false;
 
-
-
 init();
 
 function init() {
   popupControl();
   controls();
   colordisplay.textContent = pickedColor;
+  clickSquare();
+}
+
+function clickSquare() {
   for (var i=0; i < squares.length; i++) {
     squares[i].style.background = colors[i];
       squares[i].addEventListener("click", function() {
@@ -30,29 +28,36 @@ function init() {
         choiceCounter++
         this.classList.add('picked');
         if (clickedColor === pickedColor) {
-          gameOver = true;
-          changeColors(pickedColor)
-          header.style.background = pickedColor;
-          resetButton.textContent = "Play again?";
-          winnerText.style.display = "block";
-          winCounter++;
-          updateCounters();
+          win();
         } else if (clickedColor !== pickedColor && choiceCounter !== maxChoices) {
           this.style.background = "#232323";
         } else {
-          gameOver = true;
-          winnerText.textContent = "You lost. Try again!"
-          winnerText.style.display = "block";
           this.style.background = "#232323";
-          lossCounter++;
-          updateCounters();
+          lose();
         }
       }
     });
   }
 }
 
-function updateCounters(w,l,t) {
+function win() {
+  gameOver = true;
+  changeColors(pickedColor)
+  header.style.background = pickedColor;
+  winnerText.style.display = "block";
+  winCounter++;
+  updateCounters();
+}
+
+function lose() {
+  gameOver = true;
+  winnerText.textContent = "You lost. Try again!"
+  winnerText.style.display = "block";
+  lossCounter++;
+  updateCounters();
+}
+
+function updateCounters() {
   var totalCounter = winCounter + lossCounter;
   document.querySelector('#wins').textContent = winCounter;
   document.querySelector('#losses').textContent = lossCounter;
@@ -78,7 +83,6 @@ function reset(colnum) {
   maxChoices = colnum/3;
   choiceCounter = 0;
   colors = generateRandomColors(colnum);
-  resetButton.textContent = "New Colors"
   winnerText.style.display = "none";
   for (var i=0; i < squares.length; i++) {
     squares[i].classList.remove('picked');
@@ -95,6 +99,10 @@ function reset(colnum) {
 }
 
 function controls() {
+  var resetButton = document.querySelector('.controls .reset');
+  var easyButton = document.querySelector('#easy');
+  var hardButton = document.querySelector('#hard');
+
   easyButton.addEventListener("click", function() {
     easyButton.classList.add('active');
     hardButton.classList.remove('active');
