@@ -9,6 +9,8 @@ var resetButton = document.querySelector('.controls .reset');
 var easyButton = document.querySelector('#easy');
 var hardButton = document.querySelector('#hard');
 var winnerText = document.querySelector('.winnertext');
+var choiceCounter = 0;
+var maxChoices = 3;
 
 
 init();
@@ -20,20 +22,34 @@ function init() {
   for (var i=0; i < squares.length; i++) {
     squares[i].style.background = colors[i];
     squares[i].addEventListener("click", function() {
-      var clickedColor = this.style.background
-      if (clickedColor === pickedColor) {
-        messageDisplay.textContent = "Correct";
-        changeColors(pickedColor)
-        header.style.background = pickedColor;
-        resetButton.textContent = "Play again?"
-        winnerText.style.display = "block";
-      } else {
-        this.style.background = "#232323";
-        messageDisplay.textContent = "Try again!";
-      }
+        var clickedColor = this.style.background;
+      if (choiceCounter !== maxChoices) {
+        choiceCounter++
+        if (clickedColor === pickedColor) {
+          messageDisplay.textContent = "Correct";
+          changeColors(pickedColor)
+          header.style.background = pickedColor;
+          resetButton.textContent = "Play again?";
+          winnerText.style.display = "block";
+        } else if (clickedColor !== pickedColor && choiceCounter !== maxChoices) {
+          this.style.background = "#232323";
+          messageDisplay.textContent = "Try again!";
+        } else {
+          winnerText.textContent = "You lost. Try again!"
+          winnerText.style.display = "block";
+          this.style.background = "#232323";
+        }
+        }
+
+     /* } else {
+          
+     }*/
     });
   }
 }
+
+
+
 
 function popupControl() {
   var howtoplay = document.querySelector('#howto');
@@ -49,6 +65,9 @@ function popupControl() {
 }
 
 function reset(colnum) {
+  winnerText.textContent = "You Win. Congratulations!"
+  maxChoices = colnum/3;
+  choiceCounter = 0;
   colors = generateRandomColors(colnum);
   resetButton.textContent = "New Colors"
   winnerText.style.display = "none";
