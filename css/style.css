@@ -1,0 +1,34 @@
+body {
+  background: #232323;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  padding: 1%;
+  background: #555;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+.square {
+  width: 30%;
+  padding-bottom: 30%;
+  float: left;
+  margin: 1.66%;
+  border-radius: 15%;
+  transition: background ease .6s;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.controls {
+  background: #999999;
+  text-align: center;
+}
