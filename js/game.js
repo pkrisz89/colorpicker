@@ -1,7 +1,6 @@
 var colorNum = 6;
 var colors = generateRandomColors(colorNum);
 var pickedColor = pickColor();
-var messageDisplay = document.querySelector("#message");
 var colordisplay = document.getElementById('colordisplay');
 var squares = document.querySelectorAll('.square');
 var header = document.querySelector('.header');
@@ -11,6 +10,10 @@ var hardButton = document.querySelector('#hard');
 var winnerText = document.querySelector('.winnertext');
 var choiceCounter = 0;
 var maxChoices = 3;
+var winCounter = 0;
+var lossCounter = 0;
+var gameOver = false;
+
 
 
 init();
@@ -23,25 +26,36 @@ function init() {
     squares[i].style.background = colors[i];
       squares[i].addEventListener("click", function() {
       var clickedColor = this.style.background;
-      if (choiceCounter !== maxChoices) {
+      if (choiceCounter !== maxChoices && !gameOver) {
         choiceCounter++
         if (clickedColor === pickedColor) {
-          messageDisplay.textContent = "Correct";
+          gameOver = true;
           changeColors(pickedColor)
           header.style.background = pickedColor;
           resetButton.textContent = "Play again?";
           winnerText.style.display = "block";
+          winCounter++;
+          updateCounters();
         } else if (clickedColor !== pickedColor && choiceCounter !== maxChoices) {
           this.style.background = "#232323";
-          messageDisplay.textContent = "Try again!";
         } else {
+          gameOver = true;
           winnerText.textContent = "You lost. Try again!"
           winnerText.style.display = "block";
           this.style.background = "#232323";
+          lossCounter++;
+          updateCounters();
         }
       }
     });
   }
+}
+
+function updateCounters(w,l,t) {
+  var totalCounter = winCounter + lossCounter;
+  document.querySelector('#wins').textContent = winCounter;
+  document.querySelector('#losses').textContent = lossCounter;
+  document.querySelector('#total').textContent = totalCounter;
 }
 
 function popupControl() {
@@ -58,6 +72,7 @@ function popupControl() {
 }
 
 function reset(colnum) {
+  gameOver = false;
   winnerText.textContent = "You Win. Congratulations!"
   maxChoices = colnum/3;
   choiceCounter = 0;
@@ -74,7 +89,6 @@ function reset(colnum) {
   }
   pickedColor = pickColor();
   colordisplay.textContent = pickedColor;
-  messageDisplay.textContent = "";
   header.style.background = "#232323";
 }
 
