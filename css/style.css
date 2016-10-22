@@ -4,9 +4,17 @@ body {
   padding: 0;
 }
 
+a {
+  margin: 0 10px;
+}
+
 .header {
   padding: 1%;
   background: #555;
+}
+
+h2 {
+  padding-bottom: 20px;
 }
 
 h1 {
@@ -31,4 +39,8 @@ h1 {
 .controls {
   background: #999999;
   text-align: center;
+}
+
+.active {
+  background: blue;
 }
