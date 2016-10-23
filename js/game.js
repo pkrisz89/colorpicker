@@ -8,7 +8,6 @@ var choiceCounter = 0;
 var maxChoices = 3;
 var winCounter = 0;
 var lossCounter = 0;
-var gameOver = false;
 
 init();
 
@@ -24,7 +23,7 @@ function clickSquare() {
     squares[i].style.background = colors[i];
       squares[i].addEventListener("click", function() {
       var clickedColor = this.style.background;
-      if (choiceCounter !== maxChoices && !gameOver && !this.classList.contains('picked')) {
+      if (choiceCounter !== maxChoices && !this.classList.contains('picked')) {
         choiceCounter++
         this.classList.add('picked');
         if (clickedColor === pickedColor) {
@@ -41,7 +40,6 @@ function clickSquare() {
 }
 
 function win() {
-  gameOver = true;
   changeColors(pickedColor)
   header.style.background = pickedColor;
   winnerText.style.display = "block";
@@ -50,7 +48,6 @@ function win() {
 }
 
 function lose() {
-  gameOver = true;
   winnerText.textContent = "You lost. Try again!"
   winnerText.style.display = "block";
   lossCounter++;
@@ -78,7 +75,6 @@ function popupControl() {
 }
 
 function reset(colnum) {
-  gameOver = false;
   winnerText.textContent = "You Win. Congratulations!"
   maxChoices = colnum/3;
   choiceCounter = 0;
