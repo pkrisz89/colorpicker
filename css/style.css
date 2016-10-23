@@ -4,14 +4,46 @@ body {
   padding: 0;
 }
 
+.controls button {
+  color: #fff;
+}
+
+#close button {
+  color: #888;
+}
+
 button {
+  cursor: pointer;
+  background: none;
+  font-weight: bold;
+  padding: 10px 5px;
   margin: 0 10px;
+  border: 0;
+}
+
+button:focus {
+  outline: none;
 }
 
 .header {
   padding: 1%;
   background: #555;
   min-height: 100px;
+  display: flex;
+  align-content: center;
+}
+
+ul {
+  border: 1px #fff solid;
+  border-radius: 20px;
+  display: inline-block;
+  padding: 15px;
+  flex: 0 0 180px;
+}
+
+ul li {
+  list-style-type: none;
+  color: #fff;
 }
 
 h2 {
@@ -19,6 +51,7 @@ h2 {
 }
 
 h1 {
+  flex: 0 1 calc(100% - 420px);
   color: white;
   text-align: center;
 }
@@ -48,16 +81,17 @@ h1 {
 }
 
 .active {
-  background: blue;
+  background: #555 !important;
 }
 
 #howto-popup {
   display: none;
-  background: #fff;
+  background: #efefef;
   position: absolute;
-  padding: 15px;
+  padding: 15px 30px;
   max-width: 600px;
   border-radius: 5px;
+  color: #444;
 }
 
 #howto-popup #close {
@@ -77,19 +111,5 @@ h1 {
 }
 
 #message {
-  color: #fff;
-}
-
-ul {
-  border: 1px #fff solid;
-  border-radius: 20px;
-  display: inline-block;
-  padding: 15px;
-  position: absolute;
-  top: 3px;
-}
-
-ul li {
-  list-style-type: none;
   color: #fff;
 }
